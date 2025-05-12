@@ -11,6 +11,11 @@ use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\HasRoleMiddleware;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -38,3 +43,38 @@ Route::get('/kontakt', [ContactController::class, 'index'])->name('contact.index
 
 Route::get('/opinie', [FeedbackController::class, 'index'])->name('feedback.index');
 Route::post('/opinie', [FeedbackController::class, 'store'])->name('feedback.store');
+
+Route::get('/admin/login', function () {
+    return view('admin.login');
+})->name('admin.login');
+
+Route::post('/admin/login', function (Request $request) {
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required']
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        Auth::logout();
+        return redirect()->route('admin.login')->withErrors(['unauthorized' => 'Dostęp tylko dla adminów.']);
+    }
+
+    return back()->withErrors(['bad_credentials' => 'Nieprawidłowe dane logowania.']);
+});
+
+Route::middleware([AdminMiddleware::class])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view("admin.dashboard");
+    })->name('admin.dashboard');
+
+    Route::post('/admin/logout', function () {
+        Auth::logout();
+        return redirect()->route('admin.login');
+    })->name('admin.logout');
+});
