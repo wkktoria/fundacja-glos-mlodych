@@ -27,4 +27,10 @@ class PostController extends Controller
 
         return view($view, compact('post', 'previous', 'next'));
     }
+
+    public function all()
+    {
+        $posts = Post::paginate(5);
+        return view('admin.post.all', compact('posts'));
+    }
 }
