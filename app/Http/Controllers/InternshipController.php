@@ -55,6 +55,13 @@ class InternshipController extends Controller
             'obraz' => $imagePath
         ]);
 
-        return redirect('/admin/internships/all')->with('success', 'Praktyka została pomyślnie dodana do oferty.');
+        return redirect()->route('admin.internships.all')->with('success', 'Praktyka została pomyślnie dodana do oferty.');
+    }
+
+    public function destroy($id)
+    {
+        $internship = Internship::findOrFail($id);
+        $internship->delete();
+        return redirect()->route('admin.internships.all')->with('success', 'Praktyka została usunięta z oferty.');
     }
 }

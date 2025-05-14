@@ -28,7 +28,7 @@
         <h2 class="text-4xl text-center">Lista Praktyk (oferta)</h2>
         @if(session('success'))
         <div class="p-2 m-4 border border-green-500 bg-green-400 text-white font-semibold rounded-xl shadow-xl text-center">
-            <p>Pomyślnie dodano praktykę do oferty.</p>
+            <p>{{ session('success') }}</p>
         </div>
         @endif
         <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -51,7 +51,11 @@
                         </td>
                         <td class="px-6 py-4">
                             <a href="#" class="font-medium bg-yellow-500 text-white p-2 rounded-sm inline-block m-2">Edytuj</a>
-                            <a href="#" class="font-medium bg-red-500 text-white p-2 rounded-sm inline-block m-2">Usuń</a>
+                            <form method="POST" action="{{ route('admin.internships.destroy', $internship->id) }}" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-medium bg-red-500 text-white p-2 rounded-sm inline-block m-2">Usuń</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
