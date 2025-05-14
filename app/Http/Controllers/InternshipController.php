@@ -23,7 +23,38 @@ class InternshipController extends Controller
 
     public function all()
     {
-        $internships = Internship::paginate(5);
+        $internships = Internship::latest()->paginate(5);
         return view('admin.internship.all', compact('internships'));
+    }
+
+    public function create()
+    {
+        return view('admin.internship.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nazwa' => 'required|string|max:50',
+            'opis' => 'nullable|string',
+            'obowiązki' => 'required|string',
+            'narzędzia' => 'required|string',
+            'obraz' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $image = $request->file('obraz');
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->storeAs('images/internships', $imageName);
+        $imagePath = '/images/internships/' . $imageName;
+
+        Internship::create([
+            'nazwa' => $request->input('nazwa'),
+            'opis' => $request->input('opis'),
+            'obowiązki' => $request->input('obowiązki'),
+            'narzędzia' => $request->input('narzędzia'),
+            'obraz' => $imagePath
+        ]);
+
+        return redirect('/admin/internships/all')->with('success', 'Praktyka została pomyślnie dodana do oferty.');
     }
 }

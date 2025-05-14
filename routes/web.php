@@ -51,4 +51,6 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin/posts/all', [PostController::class, 'all'])->name('admin.posts.all');
 
     Route::get('/admin/internships/all', [InternshipController::class, 'all'])->name('admin.internships.all');
+    Route::get('admin/internships/create', [InternshipController::class, 'create'])->name('admin.internships.create');
+    Route::post('admin/internships', [InternshipController::class, 'store'])->name('admin.internships.store');
 });

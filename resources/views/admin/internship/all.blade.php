@@ -26,6 +26,11 @@
     </header>
     <main class="">
         <h2 class="text-4xl text-center">Lista Praktyk (oferta)</h2>
+        @if(session('success'))
+        <div class="p-2 m-4 border border-green-500 bg-green-400 text-white font-semibold rounded-xl shadow-xl text-center">
+            <p>Pomyślnie dodano praktykę do oferty.</p>
+        </div>
+        @endif
         <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
