@@ -49,4 +49,6 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::get('/admin/posts/all', [PostController::class, 'all'])->name('admin.posts.all');
+
+    Route::get('/admin/internships/all', [InternshipController::class, 'all'])->name('admin.internships.all');
 });

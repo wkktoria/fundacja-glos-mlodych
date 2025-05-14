@@ -20,4 +20,10 @@ class InternshipController extends Controller
         $internship = Internship::whereRaw('LOWER(nazwa) = ?', $decodedName)->firstOrFail();
         return view("internship.details")->with("internship", $internship);
     }
+
+    public function all()
+    {
+        $internships = Internship::paginate(5);
+        return view('admin.internship.all', compact('internships'));
+    }
 }

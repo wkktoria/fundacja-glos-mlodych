@@ -36,7 +36,7 @@
             <p class="text-xl">Ilość praktyk: <span class="font-semibold">{{ $internships->count() }}</span></p>
             <div class="w-full my-3 flex justify-around items-center">
                 <a href="#" class="p-2 bg-sky-400 hover:bg-sky-300 hover:font-semibold rounded-sm">Dodaj praktykę</a>
-                <a href="#" class="p-2 bg-sky-400 hover:bg-sky-300 hover:font-semibold rounded-sm">Lista praktyk</a>
+                <a href="{{ route('admin.internships.all') }}" class="p-2 bg-sky-400 hover:bg-sky-300 hover:font-semibold rounded-sm">Lista praktyk</a>
             </div>
         </section>
     </main>
