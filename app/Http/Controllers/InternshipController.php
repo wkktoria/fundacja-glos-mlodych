@@ -64,4 +64,38 @@ class InternshipController extends Controller
         $internship->delete();
         return redirect()->route('admin.internships.all')->with('success', 'Praktyka została usunięta z oferty.');
     }
+
+    public function edit($id)
+    {
+        $internship = Internship::findOrFail($id);
+        Log::info($internship->obowiązki);
+        return view('admin.internship.edit', compact('internship'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nazwa' => 'required|string|max:50',
+            'opis' => 'nullable|string',
+            'obowiązki' => 'required|string',
+            'narzędzia' => 'required|string',
+            'obraz' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $internship = Internship::findOrFail($id);
+
+        $data = $request->only(['nazwa', 'opis', 'obowiązki', 'narzędzia']);
+
+        if ($request->hasFile('obraz')) {
+            $image = $request->file('obraz');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->storeAs('images/internships', $imageName);
+            $data['obraz'] = '/images/internships/' . $imageName;
+        }
+
+
+        $internship->update($data);
+
+        return redirect()->route('admin.internships.all')->with('success', 'Praktyka została pomyślnie zaktualizowana.');
+    }
 }
