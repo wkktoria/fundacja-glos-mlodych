@@ -1,73 +1,47 @@
-<!DOCTYPE html>
-<html lang="pl">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodaj Post | Administracja</title>
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-    @vite(['resources/css/app.css', 'resources/css/stylesheet.css', 'resources/js/script.js'])
-    @endif
-</head>
+@section('title', 'Dodaj Post')
 
-<body class="h-screen flex flex-col justify-between">
-    <header class="flex justify-between items-center p-2 bg-black text-white">
-        <h1 class="text-2xl mx-2"><a href="{{ route('admin.dashboard') }}">Panel Administracyjny</a></h1>
-        <div class="text-center flex justify-center items-center gap-2">
-            <h2 class="text-lg">Witaj, <span class="font-semibold">{{ auth()->user()->name }}</span>!</h2>
-            <form method="POST" action="{{ route('admin.logout') }}">
-                @csrf
-                <input type="submit" value="Wyloguj" class="m-2 p-2 bg-slate-700 hover:bg-slate-800 rounded-md cursor-pointer" />
-            </form>
-        </div>
-    </header>
-    <main class="my-4 flex flex-col justify-center items-center">
-        <h2 class="my-4 text-4xl">Dodaj Post</h2>
-        @if($errors->any())
-        <div class="p-2 m-4 border border-red-500 bg-red-400 text-white font-semibold rounded-xl shadow-xl text-center">
-            <p class="font-bold">Wystąpiły błędy:</p>
-            <ul class="mx-4 list-disc">
-                @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-4">
-            @csrf
-            <div class="my-2">
-                <label for="tytuł" class="block text-sm font-medium text-gray-700 mb-1">Tytuł:</label>
-                <input id="tytuł" name="tytuł" type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600" />
-            </div>
-            <div class="my-2">
-                <label for="treść" class="block text-sm font-medium text-gray-700 mb-1">Treść:</label>
-                <input id="treść" name="treść" type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600" />
-            </div>
-            <div class="my-2">
-                <label for="obraz" class="block text-sm font-medium text-gray-700 mb-1">Obraz:</label>
-                <input id="obraz" name="obraz" type="file" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600" />
-                <span class="text-gray-300">Maksymalna wielkość pliku: 2MB</span>
-            </div>
-            <div class="my-2">
-                <label for="kategoria_id" class="block text-sm font-medium text-gray-700 mb-1">Kategoria:</label>
-                <select id="kategoria_id" name="kategoria_id" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 uppercase">
-                    <option value="">Wybierz kategorię</option>
-                    @foreach($categories as $category)
-                    <option value="{{ $category->id }}">
-                        {{ $category->nazwa }}
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="text-center">
-                <button type="submit" class="my-2 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition cursor-pointer">Dodaj</button>
-            </div>
-        </form>
-    </main>
-    <footer class="p-2 bg-gray-100 text-center">
-        <p class="text-gray-400">Copyright © 2025 Fundacja na rzecz promocji i rozwoju – Głos Młodych</p>
-    </footer>
-</body>
-
-</html>
+@section('content')
+<h2 class="my-4 text-4xl">Dodaj Post</h2>
+@if($errors->any())
+<div class="p-2 m-4 border border-red-500 bg-red-400 text-white font-semibold rounded-xl shadow-xl text-center">
+    <p class="font-bold">Wystąpiły błędy:</p>
+    <ul class="mx-4 list-disc">
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-4">
+    @csrf
+    <div class="my-2">
+        <label for="tytuł" class="block text-sm font-medium text-gray-700 mb-1">Tytuł:</label>
+        <input id="tytuł" name="tytuł" type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600" />
+    </div>
+    <div class="my-2">
+        <label for="treść" class="block text-sm font-medium text-gray-700 mb-1">Treść:</label>
+        <input id="treść" name="treść" type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600" />
+    </div>
+    <div class="my-2">
+        <label for="obraz" class="block text-sm font-medium text-gray-700 mb-1">Obraz:</label>
+        <input id="obraz" name="obraz" type="file" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600" />
+        <span class="text-gray-300">Maksymalna wielkość pliku: 2MB</span>
+    </div>
+    <div class="my-2">
+        <label for="kategoria_id" class="block text-sm font-medium text-gray-700 mb-1">Kategoria:</label>
+        <select id="kategoria_id" name="kategoria_id" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-600 uppercase">
+            <option value="">Wybierz kategorię</option>
+            @foreach($categories as $category)
+            <option value="{{ $category->id }}">
+                {{ $category->nazwa }}
+            </option>
+            @endforeach
+        </select>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="my-2 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition cursor-pointer">Dodaj</button>
+    </div>
+</form>
+@stop
