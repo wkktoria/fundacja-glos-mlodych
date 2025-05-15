@@ -42,6 +42,7 @@
     </div>
     <div class="text-center">
         <button type="submit" class="my-2 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition cursor-pointer">Dodaj</button>
+        <a href="{{ route('admin.posts.all') }}" class="my-2 bg-gray-500 text-white px-5 py-2 rounded-lg hover:bg-gray-600 transition cursor-pointer inline-block">Powrót do listy postów</a>
     </div>
 </form>
 @stop

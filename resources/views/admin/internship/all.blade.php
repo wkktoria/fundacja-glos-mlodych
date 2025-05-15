@@ -4,6 +4,7 @@
 
 @section('content')
 <h2 class="text-4xl text-center">Lista Praktyk (oferta)</h2>
+<a href="{{ route('admin.internships.create') }}" class="my-3 px-2 py-1 border border-sky-600 bg-sky-500 text-white rounded-sm shadow-sm">Dodaj praktykę do oferty</a>
 @if(session('success'))
 <div class="p-2 m-4 border border-green-500 bg-green-400 text-white font-semibold rounded-xl shadow-xl text-center">
     <p>{{ session('success') }}</p>
