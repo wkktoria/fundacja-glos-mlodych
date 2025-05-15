@@ -49,6 +49,11 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     Route::get('/admin/posts/all', [PostController::class, 'all'])->name('admin.posts.all');
+    Route::get('/admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create');
+    Route::post('/admin/posts', [PostController::class, 'store'])->name('admin.posts.store');
+    Route::delete('/admin/posts/{id}', [PostController::class, 'destroy'])->name('admin.posts.destroy');
+    Route::get('/admin/posts/{id}/edit', [PostController::class, 'edit'])->name('admin.posts.edit');
+    Route::put('/admin/posts/{id}', [PostController::class, 'update'])->name('admin.posts.update');
 
     Route::get('/admin/internships/all', [InternshipController::class, 'all'])->name('admin.internships.all');
     Route::get('/admin/internships/create', [InternshipController::class, 'create'])->name('admin.internships.create');

@@ -27,7 +27,7 @@
             <h2 class="text-2xl">Posty</h2>
             <p class="text-xl">Ilość postów: <span class="font-semibold">{{ $posts->count() }}</span></p>
             <div class="w-full my-3 flex justify-around items-center">
-                <a href="#" class="p-2 bg-gray-500 hover:bg-gray-400 hover:font-semibold rounded-sm">Dodaj post</a>
+                <a href="{{ route('admin.posts.create') }}" class="p-2 bg-gray-500 hover:bg-gray-400 hover:font-semibold rounded-sm">Dodaj post</a>
                 <a href="{{ route('admin.posts.all') }}" class="p-2 bg-gray-500 hover:bg-gray-400 hover:font-semibold rounded-sm">Lista postów</a>
             </div>
         </section>

@@ -26,6 +26,11 @@
     </header>
     <main class="">
         <h2 class="text-4xl text-center">Lista Postów</h2>
+        @if(session('success'))
+        <div class="p-2 m-4 border border-green-500 bg-green-400 text-white font-semibold rounded-xl shadow-xl text-center">
+            <p>{{ session('success') }}</p>
+        </div>
+        @endif
         <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -49,8 +54,12 @@
                             {{ $post->category->nazwa }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="font-medium bg-yellow-500 text-white p-2 rounded-sm inline-block m-2">Edytuj</a>
-                            <a href="#" class="font-medium bg-red-500 text-white p-2 rounded-sm inline-block m-2">Usuń</a>
+                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="font-medium bg-yellow-500 text-white p-2 rounded-sm inline-block m-2 cursor-pointer">Edytuj</a>
+                            <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="font-medium bg-red-500 text-white p-2 rounded-sm inline-block m-2 cursor-pointer">Usuń</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
