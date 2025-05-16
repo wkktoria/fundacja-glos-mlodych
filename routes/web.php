@@ -37,6 +37,7 @@ Route::get('/praktyki-{name}', [InternshipController::class, 'showByName'])->nam
 Route::get('/galeria', [GalleryController::class, 'index'])->name('gallery.index');
 
 Route::get('/kontakt', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/kontakt', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/opinie', [FeedbackController::class, 'index'])->name('feedback.index');
 Route::post('/opinie', [FeedbackController::class, 'store'])->name('feedback.store');

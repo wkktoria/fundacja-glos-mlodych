@@ -32,40 +32,54 @@
             <h4>Formularz Kontaktowy</h4>
             <hr class="flex-1" />
         </div>
-        <form class="flex flex-col gap-4 my-4">
+        @if(session('success'))
+        <div class="my-4 text-green-600 text-center">{{ session('success') }}</div>
+        @endif
+        @if($errors->any())
+        <div class="p-2 m-4 border border-red-500 bg-red-400 text-white font-semibold rounded-xl shadow-xl text-center">
+            <p class="font-bold">Wystąpiły błędy:</p>
+            <ul class="mx-4 list-disc">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <form method="POST" action="{{ route('contact.store') }}" class="flex flex-col gap-4 my-4">
+            @csrf
             <div class="my-2">
                 <label>
-                    <input placeholder="Imię i nazwisko *" class="w-full p-2 border border-gray-200 rounded-xs" />
+                    <input name="nazwa" required placeholder="Imię i nazwisko *" class="w-full p-2 border border-gray-200 rounded-xs" />
                 </label>
             </div>
             <div class="my-2">
                 <label>
-                    <input placeholder="Nazwa firmy" class="w-full p-2 border border-gray-200 rounded-xs" />
+                    <input name="firma" placeholder="Nazwa firmy" class="w-full p-2 border border-gray-200 rounded-xs" />
                 </label>
             </div>
             <div class="my-2">
                 <label>
-                    <input type="tel" placeholder="Telefon" class="w-full p-2 border border-gray-200 rounded-xs" />
+                    <input name="telefon" type="tel" placeholder="Telefon" class="w-full p-2 border border-gray-200 rounded-xs" />
                 </label>
             </div>
             <div class="my-2">
                 <label>
-                    <input type="email" placeholder="Adres email *" class="w-full p-2 border border-gray-200 rounded-xs" />
+                    <input name="email" type="email" required placeholder="Adres email *" class="w-full p-2 border border-gray-200 rounded-xs" />
                 </label>
             </div>
             <div class="my-2 border border-gray-200 rounded-xs">
                 <label>
-                    <input placeholder="Temat *" class="w-full p-2 border border-gray-200 rounded-xs" />
+                    <input name="temat" required placeholder="Temat *" class="w-full p-2 border border-gray-200 rounded-xs" />
                 </label>
             </div>
             <div class="my-2">
                 <label>
-                    <textarea placeholder="Treść wiadomości *" class="w-full p-2 border border-gray-200 rounded-xs"></textarea>
+                    <textarea name="treść" required placeholder="Treść wiadomości *" class="w-full p-2 border border-gray-200 rounded-xs"></textarea>
                 </label>
             </div>
             <div class="my-2">
                 <label>
-                    <input type="checkbox" /> Wyrażam zgode na przetwarzania moich danych osobowych w celu kontaktu ze mną.
+                    <input name="zgoda" type="checkbox" /> Wyrażam zgode na przetwarzania moich danych osobowych w celu kontaktu ze mną. *
                 </label>
             </div>
             <div>
