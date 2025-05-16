@@ -13,8 +13,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReportController;
 use App\Http\Middleware\AdminMiddleware;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -64,4 +62,5 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::put('/admin/internship/{id}', [InternshipController::class, 'update'])->name('admin.internships.update');
 
     Route::get('/admin/wiadomosci', [ContactController::class, 'all'])->name('admin.messages.all');
+    Route::get('/admin/wiadomosci/{id}', [ContactController::class, 'show'])->name('admin.messages.show');
 });

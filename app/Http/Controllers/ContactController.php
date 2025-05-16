@@ -34,4 +34,10 @@ class ContactController extends Controller
         $messages = ContactMessage::latest()->paginate(5);
         return view('admin.all_messages', compact('messages'));
     }
+
+    public function show($id)
+    {
+        $message = ContactMessage::findOrFail($id);
+        return view('admin.message', compact('message'));
+    }
 }

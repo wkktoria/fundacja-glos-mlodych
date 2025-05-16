@@ -32,7 +32,7 @@
                     {{ $message->nadawca }}
                 </td>
                 <td class="px-6 py-4">
-
+                    <a href="{{ route('admin.messages.show', $message->id) }}" class="font-medium bg-blue-500 text-white p-2 rounded-sm inline-block m-2 cursor-pointer">Zobacz</a>
                 </td>
             </tr>
             @endforeach
