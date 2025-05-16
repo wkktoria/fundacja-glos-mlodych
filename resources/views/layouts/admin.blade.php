@@ -14,6 +14,13 @@
 <body class="h-screen flex flex-col justify-between">
     <header class="flex justify-between items-center p-2 bg-black text-white">
         <h1 class="text-2xl mx-2"><a href="{{ route('admin.dashboard') }}">Panel Administracyjny</a></h1>
+        <nav>
+            <ul class="flex flex-wrap justify-center gap-2">
+                <li><a href="{{ route('admin.posts.all') }}" class="text-white hover:text-gray-300">Posty</a></li>
+                <li><a href="{{ route('admin.internships.all') }}" class="text-white hover:text-gray-300">Praktyki</a></li>
+                <li><a href="{{ route('admin.messages.all') }}" class="text-white hover:text-gray-300">Wiadomości</a></li>
+            </ul>
+        </nav>
         <div class="text-center flex justify-center items-center gap-2">
             <h2 class="text-lg">Witaj, <span class="font-semibold">{{ auth()->user()->name }}</span>!</h2>
             <form method="POST" action="{{ route('admin.logout') }}">
@@ -24,7 +31,6 @@
     </header>
     <main class="flex flex-col justify-center items-center">
         @yield('content')
-
     </main>
     <footer class="p-2 bg-gray-100 text-center">
         <p class="text-gray-400">Copyright © 2025 Fundacja na rzecz promocji i rozwoju – Głos Młodych</p>
