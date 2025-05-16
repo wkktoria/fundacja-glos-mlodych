@@ -8,5 +8,5 @@ class ContactMessage extends Model
 {
     protected $table = 'wiadomości';
 
-    protected $fillable = ['nazwa', 'firma', 'telefon', 'email', 'temat', 'treść', 'zgoda'];
+    protected $fillable = ['nadawca', 'firma', 'telefon', 'email', 'temat', 'treść', 'zgoda'];
 }

@@ -15,7 +15,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nazwa' => 'required|string|max:255',
+            'nadawca' => 'required|string|max:255',
             'firma' => 'nullable|string|max:255',
             'telefon' => 'nullable|string|max:20',
             'email' => 'required|email',
@@ -27,5 +27,11 @@ class ContactController extends Controller
         ContactMessage::create($validated);
 
         return redirect()->route('contact.index')->with('success', 'Wiadomość została wysłana.');
+    }
+
+    public function all()
+    {
+        $messages = ContactMessage::latest()->paginate(5);
+        return view('admin.all_messages', compact('messages'));
     }
 }

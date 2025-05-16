@@ -62,4 +62,6 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::delete('/admin/internships/{id}', [InternshipController::class, 'destroy'])->name('admin.internships.destroy');
     Route::get('/admin/internship/{id}/edit', [InternshipController::class, 'edit'])->name('admin.internships.edit');
     Route::put('/admin/internship/{id}', [InternshipController::class, 'update'])->name('admin.internships.update');
+
+    Route::get('/admin/wiadomosci', [ContactController::class, 'all'])->name('admin.messages.all');
 });

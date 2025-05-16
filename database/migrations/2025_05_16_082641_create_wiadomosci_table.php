@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('wiadomości', function (Blueprint $table) {
             $table->id();
-            $table->string('nazwa');
+            $table->string('nadawca');
             $table->string('firma')->nullable();
             $table->string('telefon')->nullable();
             $table->string('email');

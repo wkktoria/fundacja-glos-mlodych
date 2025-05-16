@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactMessage;
 use App\Models\Internship;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -49,6 +50,7 @@ class AdminController extends Controller
     {
         $posts = Post::all();
         $internships = Internship::all();
-        return view('admin.dashboard', compact('posts', 'internships'));
+        $messages = ContactMessage::all();
+        return view('admin.dashboard', compact('posts', 'internships', 'messages'));
     }
 }

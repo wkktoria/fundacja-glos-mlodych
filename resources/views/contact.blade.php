@@ -49,7 +49,7 @@
             @csrf
             <div class="my-2">
                 <label>
-                    <input name="nazwa" required placeholder="Imię i nazwisko *" class="w-full p-2 border border-gray-200 rounded-xs" />
+                    <input name="nadawca" required placeholder="Imię i nazwisko *" class="w-full p-2 border border-gray-200 rounded-xs" />
                 </label>
             </div>
             <div class="my-2">
