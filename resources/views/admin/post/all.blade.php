@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('Lista Postów', 'Fundacja Głos Młodych')
+@section('title', 'Lista Postów')
 
 @section('content')
 <h2 class="text-4xl text-center">Lista Postów</h2>
@@ -33,6 +33,7 @@
                     {{ $post->category->nazwa }}
                 </td>
                 <td class="px-6 py-4">
+                    <a href="{{ route('admin.posts.show', $post->id) }}" class="font-medium bg-blue-500 text-white p-2 rounded-sm inline-block m-2 cursor-pointer">Zobacz</a>
                     <a href="{{ route('admin.posts.edit', $post->id) }}" class="font-medium bg-yellow-500 text-white p-2 rounded-sm inline-block m-2 cursor-pointer">Edytuj</a>
                     <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}" class="inline">
                         @csrf

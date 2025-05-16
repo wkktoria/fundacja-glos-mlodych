@@ -29,6 +29,7 @@
                     {{ $internship->nazwa }}
                 </td>
                 <td class="px-6 py-4">
+                    <a href="{{ route('admin.internships.show', $internship->id) }}" class="font-medium bg-blue-500 text-white p-2 rounded-sm inline-block m-2 cursor-pointer">Zobacz</a>
                     <a href="{{ route('admin.internships.edit', $internship->id) }}" class="font-medium bg-yellow-500 text-white p-2 rounded-sm inline-block m-2">Edytuj</a>
                     <form method="POST" action="{{ route('admin.internships.destroy', $internship->id) }}" class="inline">
                         @csrf

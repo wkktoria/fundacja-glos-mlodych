@@ -101,4 +101,10 @@ class PostController extends Controller
 
         return redirect()->route('admin.posts.all')->with('success', 'Post został pomyślnie zaktualizowany.');
     }
+
+    public function showAdmin($id)
+    {
+        $post = Post::findOrFail($id);
+        return view('admin.post.show', compact('post'));
+    }
 }

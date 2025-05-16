@@ -50,6 +50,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin/posts/all', [PostController::class, 'all'])->name('admin.posts.all');
     Route::get('/admin/posts/create', [PostController::class, 'create'])->name('admin.posts.create');
     Route::post('/admin/posts', [PostController::class, 'store'])->name('admin.posts.store');
+    Route::get('/admin/posts/{id}', [PostController::class, 'showAdmin'])->name('admin.posts.show');
     Route::delete('/admin/posts/{id}', [PostController::class, 'destroy'])->name('admin.posts.destroy');
     Route::get('/admin/posts/{id}/edit', [PostController::class, 'edit'])->name('admin.posts.edit');
     Route::put('/admin/posts/{id}', [PostController::class, 'update'])->name('admin.posts.update');
@@ -57,6 +58,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/admin/internships/all', [InternshipController::class, 'all'])->name('admin.internships.all');
     Route::get('/admin/internships/create', [InternshipController::class, 'create'])->name('admin.internships.create');
     Route::post('/admin/internships', [InternshipController::class, 'store'])->name('admin.internships.store');
+    Route::get('/admin/internships/{id}', [InternshipController::class, 'show'])->name('admin.internships.show');
     Route::delete('/admin/internships/{id}', [InternshipController::class, 'destroy'])->name('admin.internships.destroy');
     Route::get('/admin/internship/{id}/edit', [InternshipController::class, 'edit'])->name('admin.internships.edit');
     Route::put('/admin/internship/{id}', [InternshipController::class, 'update'])->name('admin.internships.update');

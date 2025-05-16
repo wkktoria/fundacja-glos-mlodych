@@ -98,4 +98,10 @@ class InternshipController extends Controller
 
         return redirect()->route('admin.internships.all')->with('success', 'Praktyka została pomyślnie zaktualizowana.');
     }
+
+    public function show($id)
+    {
+        $internship = Internship::findOrFail($id);
+        return view('admin.internship.show', compact('internship'));
+    }
 }
